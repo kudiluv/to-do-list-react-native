@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet, ViewStyle} from 'react-native';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
-import {Button, ListItem} from 'react-native-elements';
+import {Button, ListItem, ListItemSwipeableProps} from 'react-native-elements';
 
 type PropsType = {
   style?: ViewStyle;
@@ -11,6 +11,7 @@ type PropsType = {
   checked?: boolean;
   onPress?: () => void;
   onDelete?: () => void;
+  listItemSwipeble?: ListItemSwipeableProps;
 };
 
 export default (props: PropsType) => {
@@ -24,7 +25,8 @@ export default (props: PropsType) => {
           buttonStyle={styles.buttonDelete}
           onPress={props.onDelete}
         />
-      }>
+      }
+      {...props.listItemSwipeble}>
       <ListItem.Content>
         <ListItem.Title style={props.checked && styles.textStrike}>
           {props.text}

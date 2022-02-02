@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {PaginateType} from '../types/PaginateType';
-import {CreateTaskDto} from './dto/create.task.dto';
 import {Status} from './dto/status.enum';
 import {TaskDto} from './dto/task.dto';
 import {API_URL} from '@env';
@@ -21,7 +20,7 @@ export const tasksApi = createApi({
           : [{type: 'Tasks', id: 'PARTIAL-LIST'}],
     }),
     addTask: builder.mutation({
-      query: (body: CreateTaskDto) => ({
+      query: (body: FormData) => ({
         url: 'tasks',
         method: 'POST',
         body,
