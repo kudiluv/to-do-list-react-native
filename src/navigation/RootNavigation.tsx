@@ -4,12 +4,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Tasks from '../components/tasks/Tasks';
 import NewTask from '../components/tasks/NewTask';
 import Header from './Header';
+import RNBootSplash from 'react-native-bootsplash';
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={() => RNBootSplash.hide()}>
       <Stack.Navigator>
         <Stack.Screen
           name="Tasks"
