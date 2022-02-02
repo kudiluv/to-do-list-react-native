@@ -3,11 +3,12 @@ import {PaginateType} from '../types/PaginateType';
 import {CreateTaskDto} from './dto/create.task.dto';
 import {Status} from './dto/status.enum';
 import {TaskDto} from './dto/task.dto';
+import {API_URL} from '@env';
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
   tagTypes: ['Tasks'],
-  baseQuery: fetchBaseQuery({baseUrl: 'http://10.0.2.2:3000/'}),
+  baseQuery: fetchBaseQuery({baseUrl: API_URL}),
   endpoints: builder => ({
     getTasks: builder.query<PaginateType<TaskDto[]>, unknown>({
       query: (page = 1) => `tasks?sortBy=id:DESC&page=${page}`,
