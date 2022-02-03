@@ -10,6 +10,8 @@ import {useInputValidator} from '../../helpers/inputValidation/useInputValidatio
 import globalBackgroundColor from '../styles/globalBackgroundColor';
 import {faTasks} from '@fortawesome/free-solid-svg-icons';
 import useGettingCropedImage from '../../helpers/useGettingCropedImage';
+import path from 'path';
+import mime from 'mime-types';
 
 export default () => {
   const validationValues = useInputValidator('', [new IsNotEmpty()]);
@@ -19,7 +21,12 @@ export default () => {
   const getFormData = () => {
     const form = new FormData();
     form.append('text', validationValues.value);
-    image && form.append('image', image);
+    image &&
+      form.append('image', {
+        uri: image,
+        name: path.basename(image),
+        type: mime.lookup(image),
+      });
     return form;
   };
   const onAdd = async () => {

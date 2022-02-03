@@ -1,5 +1,6 @@
+import {API_URL} from '@env';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Status} from '../../api/dto/status.enum';
 import {useDeleteTasksMutation, useGetTasksQuery} from '../../api/tasksApi';
@@ -13,7 +14,6 @@ export default () => {
   const {page, useNext} = usePagination(1);
   const {data} = useGetTasksQuery(page);
   const next = useNext(data);
-  console.log(data);
   const navigate = useNavigation();
   const onPressNewTask = () => {
     navigate.navigate('Tasks/new');
@@ -30,6 +30,10 @@ export default () => {
             checked={value.item.status === Status.COMPLETE}
             onDelete={() => deleteTask(value.item.id)}
             onPress={() => changeStatusTask(value.item.id, value.item.status)}
+            imgSource={
+              value.item.img ? `${API_URL}/${value.item.img}` : undefined
+            }
+            updatedAt={value.item.updatedAt}
           />
         )}
         keyExtractor={item => item.id}

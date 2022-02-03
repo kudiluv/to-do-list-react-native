@@ -15,9 +15,9 @@ export const tasksApi = createApi({
         result
           ? [
               ...result.data.map(({id}) => ({type: 'Tasks' as const, id})),
-              {type: 'Tasks', id: 'PARTIAL-LIST'},
+              {type: 'Tasks', id: 'LIST'},
             ]
-          : [{type: 'Tasks', id: 'PARTIAL-LIST'}],
+          : [{type: 'Tasks', id: 'LIST'}],
     }),
     addTask: builder.mutation({
       query: (body: FormData) => ({
@@ -25,14 +25,14 @@ export const tasksApi = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: [{type: 'Tasks', id: 'PARTIAL-LIST'}],
+      invalidatesTags: [{type: 'Tasks', id: 'LIST'}],
     }),
     deleteTasks: builder.mutation({
       query: (id: number) => ({
         url: `tasks/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{type: 'Tasks', id: 'PARTIAL-LIST'}],
+      invalidatesTags: [{type: 'Tasks', id: 'LIST'}],
     }),
     updateStatusTask: builder.mutation({
       query: (body: {id: number; status: Status}) => ({
@@ -40,7 +40,7 @@ export const tasksApi = createApi({
         method: 'PUT',
         body: {status: body.status},
       }),
-      invalidatesTags: [{type: 'Tasks', id: 'PARTIAL-LIST'}],
+      invalidatesTags: [{type: 'Tasks', id: 'LIST'}],
     }),
   }),
 });
